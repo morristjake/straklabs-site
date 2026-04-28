@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StrakLabs — Hand-verified B2B Lead Lists</title>
+  <meta name="description" content="Hand-verified B2B lead lists for niches the big tools miss. Apollo and ZoomInfo cost $1,000+/month and still return half-stale leads. We hand-verify every contact." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #08080F;
+      --bg-2:      #0E0E1A;
+      --bg-3:      #141424;
+      --ink:       #EEEEF8;
+      --ink-2:     #9898B8;
+      --ink-3:     #55556A;
+      --blue:      oklch(63% 0.21 248);
+      --blue-dim:  oklch(63% 0.21 248 / 0.15);
+      --blue-glow: oklch(63% 0.21 248 / 0.35);
+      --amber:     oklch(72% 0.18 58);
+      --amber-dim: oklch(72% 0.18 58 / 0.12);
+      --rule:      rgba(255,255,255,0.08);
+      --radius:    6px;
+      --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      --max: 1080px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8,8,15,0.82);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink-2);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── SHARED ── */
+    section { padding: 96px 32px; }
+    .container { max-width: var(--max); margin: 0 auto; }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+    h1, h2, h3 { letter-spacing: -0.4px; line-height: 1.2; }
+    h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; }
+    h2 { font-size: clamp(26px, 3.5vw, 36px); font-weight: 700; }
+    h3 { font-size: 18px; font-weight: 600; }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: var(--radius);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.18s;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 0 24px var(--blue-glow);
+    }
+    .btn-primary:hover {
+      filter: brightness(1.15);
+      box-shadow: 0 0 36px var(--blue-glow);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--ink);
+      border: 1.5px solid rgba(255,255,255,0.18);
+    }
+    .btn-outline:hover {
+      border-color: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* ── HERO ── */
+    #hero {
+      padding: 0;
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('hero-bg.png');
+      background-size: cover;
+      background-position: center right;
+      z-index: 0;
+    }
+    .hero-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(8,8,15,0.92) 0%,
+        rgba(8,8,15,0.72) 50%,
+        rgba(8,8,15,0.15) 100%
+      );
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 120px 32px;
+      width: 100%;
+    }
+    .hero-content { max-width: 640px; }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 20px;
+    }
+    .hero-content h1 {
+      color: #fff;
+      margin-bottom: 22px;
+      text-wrap: pretty;
+    }
+    .hero-content p {
+      font-size: clamp(16px, 2vw, 19px);
+      color: rgba(238,238,248,0.75);
+      max-width: 560px;
+      margin-bottom: 40px;
+      line-height: 1.72;
+    }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* ── PROBLEMS ── */
+    #problems {
+      border-bottom: 1px solid var(--rule);
+      background: var(--bg);
+    }
+    .problems-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 52px;
+    }
+    .problem-card {
+      padding: 32px;
+      background: var(--bg-2);
+      border-radius: 12px;
+      border: 1px solid var(--rule);
+    }
+    .problem-card .icon {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 18px;
+      color: var(--blue);
+    }
+    .problem-card h3 { margin-bottom: 10px; font-size: 17px; color: var(--ink); }
+    .problem-card p { font-size: 15px; color: var(--ink-2); line-height: 1.65; }
+
+    /* ── CSV TABLE ── */
+    #csv-preview { border-bottom: 1px solid var(--rule); background: var(--bg); }
+    .csv-intro { max-width: 600px; margin-bottom: 48px; }
+    .csv-intro p { font-size: 16px; color: var(--ink-2); margin-top: 12px; }
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      background: var(--bg-2);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+    thead tr {
+      background: var(--bg-3);
+      border-bottom: 1px solid var(--rule);
+    }
+    th {
+      padding: 12px 18px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+    td {
+      padding: 13px 18px;
+      color: var(--ink);
+      border-bottom: 1px solid var(--rule);
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: var(--bg-3); }
+    .redacted { color: var(--ink-3); font-family: monospace; letter-spacing: -0.5px; }
+    .table-caption {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--ink-3);
+      font-style: italic;
+    }
+
+    /* ── GUARANTEE ── */
+    #guarantee {
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--rule);
+    }
+    .guarantee-inner { max-width: 760px; }
+    .guarantee-quote {
+      font-size: clamp(19px, 2.4vw, 25px);
+      font-weight: 500;
+      line-height: 1.55;
+      color: var(--ink);
+      margin: 28px 0 44px;
+      padding: 28px 32px;
+      background: var(--bg-3);
+      border-left: 3px solid var(--blue);
+      border-radius: 0 8px 8px 0;
+      box-shadow: inset 0 0 60px rgba(var(--blue), 0.03);
+    }
+    .trust-signals {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink-2);
+    }
+    .trust-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--blue);
+      flex-shrink: 0;
+      box-shadow: 0 0 8px var(--blue-glow);
+    }
+
+    /* ── PRODUCTS ── */
+    #products { border-bottom: 1px solid var(--rule); background: var(--bg); }
+    .products-header { margin-bottom: 48px; }
+    .products-header p { font-size: 15px; color: var(--ink-2); margin-top: 10px; }
+    .products-header a { color: var(--blue); text-decoration: none; }
+    .products-header a:hover { text-decoration: underline; }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 28px;
+    }
+    .product-card {
+      border: 1px solid rgba(var(--blue), 0.2);
+      border-color: rgba(100,130,255,0.2);
+      border-radius: 14px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-2);
+      position: relative;
+      overflow: hidden;
+    }
+    .product-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+      opacity: 0.6;
+    }
+    .product-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .product-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--amber);
+      background: var(--amber-dim);
+      padding: 3px 9px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .product-card h3 {
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 8px;
+      padding-right: 12px;
+      color: var(--ink);
+    }
+    .product-stats {
+      font-size: 13px;
+      color: var(--ink-3);
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+    .product-desc {
+      font-size: 15px;
+      color: var(--ink-2);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+    .product-bullets {
+      list-style: none;
+      margin-bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .product-bullets li {
+      font-size: 14px;
+      color: var(--ink-2);
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+    }
+    .product-bullets li::before {
+      content: "✓";
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 13px;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+    .product-footer { margin-top: auto; }
+    .product-price {
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 18px;
+      letter-spacing: -1.5px;
+    }
+    .product-price span {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--ink-3);
+      letter-spacing: 0;
+    }
+    .btn-buy {
+      width: 100%;
+      display: block;
+      text-align: center;
+      padding: 15px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: all 0.18s;
+      margin-bottom: 10px;
+      box-shadow: 0 0 28px var(--blue-glow);
+    }
+    .btn-buy:hover {
+      filter: brightness(1.15);
+      box-shadow: 0 0 44px var(--blue-glow);
+    }
+    /* ── TABLE CELL STYLES ── */
+    .td-company { font-weight: 600; color: var(--ink); }
+    .td-city { color: var(--ink-2); }
+    .redacted-block {
+      display: inline-block;
+      background: rgba(255,255,255,0.06);
+      color: var(--ink-3);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 3px 10px;
+      border-radius: 4px;
+      border: 1px solid var(--rule);
+      text-transform: uppercase;
+    }
+    .verified-email {
+      display: inline-block;
+      background: rgba(255,255,255,0.04);
+      color: var(--ink-3);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 3px 10px;
+      border-radius: 4px;
+      border: 1px solid var(--rule);
+      text-transform: uppercase;
+    }
+    .direct-check {
+      color: var(--blue);
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    /* ── COMPLEMENT BOX ── */
+    .complement-wrap {
+      padding: 0 32px;
+      background: var(--bg);
+    }
+    .complement-box {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 20px 24px;
+      border-left: 3px solid var(--blue);
+      background: var(--blue-dim);
+      border-radius: 0 8px 8px 0;
+    }
+    .complement-heading {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 6px;
+      letter-spacing: -0.1px;
+    }
+    .complement-text {
+      font-size: 14px;
+      color: var(--ink-2);
+      line-height: 1.6;
+      max-width: 680px;
+    }
+
+    .secure-note {
+      font-size: 12px;
+      color: var(--ink-3);
+      text-align: center;
+    }
+
+    /* ── FAQ ── */
+    #faq { border-bottom: 1px solid var(--rule); background: var(--bg); }
+    .faq-list { max-width: 720px; margin-top: 48px; }
+    .faq-item { border-bottom: 1px solid var(--rule); }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 22px 0;
+      text-align: left;
+      font-family: var(--font);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .faq-question:hover { color: var(--blue); }
+    .faq-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      position: relative;
+      color: var(--ink-3);
+    }
+    .faq-icon::before,
+    .faq-icon::after {
+      content: "";
+      position: absolute;
+      background: currentColor;
+      border-radius: 2px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .faq-icon::before { width: 12px; height: 1.5px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .faq-icon::after  { width: 1.5px; height: 12px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .faq-item.open .faq-icon::after { opacity: 0; transform: translate(-50%, -50%) rotate(90deg); }
+    .faq-item.open .faq-icon { color: var(--blue); }
+    .faq-answer {
+      font-size: 15px;
+      color: var(--ink-2);
+      line-height: 1.7;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.28s ease;
+    }
+    .faq-answer-inner { padding-bottom: 22px; }
+    .faq-item.open .faq-answer { max-height: 400px; }
+    .faq-answer a { color: var(--blue); text-decoration: none; }
+    .faq-answer a:hover { text-decoration: underline; }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--rule);
+    }
+    .about-inner { max-width: 620px; }
+    .about-inner h2 { margin-bottom: 24px; }
+    .about-inner p {
+      font-size: 17px;
+      color: var(--ink-2);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .about-inner a { color: var(--blue); text-decoration: none; font-weight: 500; }
+    .about-inner a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer { padding: 40px 32px; border-top: 1px solid var(--rule); background: var(--bg); }
+    .footer-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-left p { font-size: 14px; color: var(--ink-3); line-height: 1.7; }
+    .footer-left strong { color: var(--ink-2); font-weight: 600; }
+    .footer-right { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-right a {
+      font-size: 14px;
+      color: var(--ink-3);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-right a:hover { color: var(--ink); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 720px) {
+      section { padding: 64px 20px; }
+      .nav-inner { padding: 0 20px; }
+      .nav-links { gap: 20px; }
+      .problems-grid { grid-template-columns: 1fr; gap: 16px; }
+      .trust-signals { flex-direction: column; gap: 16px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .hero-inner { padding: 100px 20px 80px; }
+    }
+    @media (max-width: 500px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero">StrakLabs</a>
+    <ul class="nav-links">
+      <li><a href="#products">Products</a></li>
+      <li><a href="#guarantee">Guarantee</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#about">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <span class="hero-eyebrow">B2B Lead Intelligence</span>
+      <h1>Hand-verified lead lists for niches the big tools miss.</h1>
+      <p>Apollo and ZoomInfo are great for enterprise sales. They miss the regional firms, niche specialists, and mid-market operators that matter when you're selling to smaller B2B targets — that's the gap we fill.</p>
+      <div class="hero-btns">
+        <a href="#products" class="btn btn-primary">See Available Lists</a>
+        <a href="#csv-preview" class="btn btn-outline">How We Verify</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROBLEMS ── -->
+<section id="problems">
+  <div class="container">
+    <div class="section-label">The problem with big data tools</div>
+    <div class="problems-grid">
+
+      <div class="problem-card">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          <line x1="11" y1="8" x2="11" y2="14"></line>
+          <line x1="8" y1="11" x2="14" y2="11"></line>
+        </svg>
+        <h3>Big tools miss small niches</h3>
+        <p>Apollo is built for enterprise SaaS. Independent contractors and regional firms are underrepresented or missing entirely.</p>
+      </div>
+
+      <div class="problem-card">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        <h3>Stale data wastes your time</h3>
+        <p>Most lists are scraped once and sold for years. We verify every email within 30 days of delivery.</p>
+      </div>
+
+      <div class="problem-card">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <line x1="23" y1="11" x2="17" y2="11"></line>
+        </svg>
+        <h3>Generic doesn't convert</h3>
+        <p>Every contact is researched individually. Named decision-makers, not generic info@ inboxes.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CSV PREVIEW ── -->
+<section id="csv-preview">
+  <div class="container">
+    <div class="csv-intro">
+      <div class="section-label">What you receive</div>
+      <h2>What's in every list</h2>
+      <p>Each list ships as a clean CSV ready for your outreach tool. Import directly to Apollo, Smartlead, Instantly, or open in Google Sheets.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Company Name</th>
+            <th>City</th>
+            <th>Contact</th>
+            <th>Title</th>
+            <th>Email</th>
+            <th>Phone</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-company">Crown Commercial PM</td>
+            <td class="td-city">Los Angeles</td>
+            <td><span class="redacted-block">Redacted</span></td>
+            <td>CEO</td>
+            <td><span class="verified-email">Verified email</span></td>
+            <td><span class="direct-check">✓ Direct</span></td>
+          </tr>
+          <tr>
+            <td class="td-company">HC&amp;M Commercial Properties</td>
+            <td class="td-city">San Francisco</td>
+            <td><span class="redacted-block">Redacted</span></td>
+            <td>President</td>
+            <td><span class="verified-email">Verified email</span></td>
+            <td><span class="direct-check">✓ Direct</span></td>
+          </tr>
+          <tr>
+            <td class="td-company">Gallaway Commercial</td>
+            <td class="td-city">Sacramento</td>
+            <td><span class="redacted-block">Redacted</span></td>
+            <td>President</td>
+            <td><span class="verified-email">Verified email</span></td>
+            <td><span class="direct-check">✓ Direct</span></td>
+          </tr>
+          <tr>
+            <td class="td-company">Meissner CRE</td>
+            <td class="td-city">San Diego</td>
+            <td><span class="redacted-block">Redacted</span></td>
+            <td>VP Business Dev</td>
+            <td><span class="verified-email">Verified email</span></td>
+            <td><span class="direct-check">✓ Direct</span></td>
+          </tr>
+          <tr>
+            <td class="td-company">Pacific Coast Commercial</td>
+            <td class="td-city">San Diego</td>
+            <td><span class="redacted-block">Redacted</span></td>
+            <td>Director</td>
+            <td><span class="verified-email">Verified email</span></td>
+            <td><span class="direct-check">✓ Direct</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-caption">Sample shown with contact details redacted. Full data delivered immediately after purchase.</p>
+  </div>
+</section>
+
+<!-- ── GUARANTEE ── -->
+<section id="guarantee">
+  <div class="container guarantee-inner">
+    <div class="section-label">Our commitment</div>
+    <h2>The StrakLabs guarantee</h2>
+    <p class="guarantee-quote">"If more than 5% of emails bounce, I'll refund the difference or send replacement leads. No questions, no forms — just reply to the delivery email."</p>
+    <div class="trust-signals">
+      <div class="trust-item"><span class="trust-dot"></span> Verified within 30 days</div>
+      <div class="trust-item"><span class="trust-dot"></span> Direct from the source</div>
+      <div class="trust-item"><span class="trust-dot"></span> Named decision-makers</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COMPLEMENT CALLOUT ── -->
+<div class="complement-wrap">
+  <div class="container">
+    <div class="complement-box">
+      <p class="complement-heading">Already paying for Apollo, ZoomInfo, or Clay?</p>
+      <p class="complement-text">StrakLabs complements your existing tools. We fill the gaps in niche verticals where the big databases come up empty. Use both — our lists cover the mid-market firms and regional operators they miss.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── PRODUCTS ── -->
+<section id="products">
+  <div class="container">
+    <div class="products-header">
+      <div class="section-label">Lead lists</div>
+      <h2>Available lists</h2>
+      <p>More niches launching weekly. Email me with requests at <a href="mailto:jake@straklabs.com">jake@straklabs.com</a>.</p>
+    </div>
+
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-top">
+          <h3>California Commercial Property Managers — Sampler</h3>
+          <span class="product-tag">NEW</span>
+        </div>
+        <p class="product-stats">31 verified contacts &nbsp;·&nbsp; 20 firms &nbsp;·&nbsp; 7 California metros</p>
+        <p class="product-desc">Decision-makers at California commercial property management firms. Owners, principals, presidents, and named property managers across San Diego, Sacramento, San Francisco, LA, OC, and the Inland Empire. Ideal for solar installers, commercial HVAC, roofing contractors, and B2B vendors.</p>
+        <ul class="product-bullets">
+          <li>31 verified contacts (28 named decision-makers)</li>
+          <li>25 contacts include direct phone numbers</li>
+          <li>20 unique firms across 7 California metros</li>
+          <li>All emails verified within the last 30 days</li>
+          <li>Delivered as CSV immediately after purchase</li>
+        </ul>
+        <div class="product-footer">
+          <div class="product-price">$47 <span>one-time</span></div>
+          <a href="https://buy.stripe.com/REPLACE_ME" class="btn-buy">Buy now — $47</a>
+          <p class="secure-note">Secure checkout via Stripe. Instant delivery.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section id="faq">
+  <div class="container">
+    <div class="section-label">Questions</div>
+    <h2>Frequently asked questions</h2>
+
+    <div class="faq-list" id="faqList">
+
+      <div class="faq-item">
+        <button class="faq-question">Where does the data come from?<span class="faq-icon"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Every contact is sourced manually from company websites, association directories, public license databases, and verified business listings. No reselling of stale databases.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">How fresh is the data?<span class="faq-icon"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Every email is verified within 30 days before delivery. Contact names are pulled directly from current company websites at time of compilation.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">What if emails bounce?<span class="faq-icon"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">If more than 5% bounce on your initial send, reply to your delivery email. I'll refund the difference or send replacement contacts.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Can I get a refund?<span class="faq-icon"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Yes — if you're not happy with the data quality within 7 days, full refund. No forms, no questions.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Do you do custom lists?<span class="faq-icon"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Yes. Email <a href="mailto:jake@straklabs.com">jake@straklabs.com</a> with your criteria. Custom builds start at $297 and ship within 7 days.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Can I resell the list?<span class="faq-icon"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">The list is licensed for your own outreach only. Reselling or redistributing is not permitted.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Is this CCPA/CAN-SPAM compliant?<span class="faq-icon"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">The data is publicly available B2B contact information. You as the sender are responsible for compliance with applicable regulations in your outreach.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">How fast is delivery?<span class="faq-icon"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Instant. Payment clears, email with CSV download link arrives within 60 seconds.</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="container about-inner">
+    <div class="section-label">Who's behind this</div>
+    <h2>About StrakLabs</h2>
+    <p>Hi, I'm Jake. I run StrakLabs from Long Beach, California. I started this after months of paying $1,000+/month for B2B data tools that returned half-stale leads in the niches I actually wanted to reach. Now I do this full-time — hand-sourcing and verifying lead lists in narrow B2B niches, so contractors, agencies, and small sales teams can run real outreach without enterprise data budgets.</p>
+    <p>If you've got a niche you wish someone would build a list for, email me. I read every email.</p>
+    <a href="mailto:jake@straklabs.com">jake@straklabs.com</a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <p><strong>StrakLabs</strong> — Hand-verified B2B lead lists</p>
+      <p>© 2026 StrakLabs. Long Beach, CA.</p>
+    </div>
+    <div class="footer-right">
+      <a href="#faq">Terms</a>
+      <a href="#faq">Privacy</a>
+      <a href="#faq">Refund Policy</a>
+      <a href="mailto:jake@straklabs.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const faqList = document.getElementById('faqList');
+  faqList.addEventListener('click', function(e) {
+    const btn = e.target.closest('.faq-question');
+    if (!btn) return;
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    faqList.querySelectorAll('.faq-item.open').forEach(function(el) {
+      el.classList.remove('open');
+    });
+    if (!isOpen) item.classList.add('open');
+  });
+</script>
+
+</body>
+</html>
